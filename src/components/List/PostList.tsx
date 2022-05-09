@@ -18,19 +18,21 @@ const PostList = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    if(loading) {
       axios.get<Post>('http://54.242.252.42:8000/posts')
-            .then(res => {
-              dispatch(loadPost(res.data))
-              console.log(res.data)
-            })
-  }, [])
+        .then(res => {
+          dispatch(loadPost(res.data))
+          console.log(res.data)
+        })
+    }
+  }, [loading])
 
   return (
     (loading ? (
-      <CircularProgress color='inherit' />
+      <CircularProgress color='inherit' sx={{ mt: 3}} />
     ): (
       <Box mt={3} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '3rem' }}>
-              {posts.map((post: any) => (<PostItem id={post.id} name={post.name} title={post.title} location={post.location} visit={post.visit} vaccines={post.vaccines} description={post.description} number={post.number} />))}
+              {posts.map((post: any) => (<PostItem key={post.id} id={post.id} name={post.name} title={post.title} location={post.location} visit={post.visit} vaccines={post.vaccines} description={post.description} number={post.number} subject={post.subject} />))}
       </Box>
     ))
  
