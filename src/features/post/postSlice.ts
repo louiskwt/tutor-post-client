@@ -1,15 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-
+export type Post = {
+    title: string
+    name: string
+    subject: string
+    description: string
+    location: string
+    number: string
+    vaccines: number
+    visit: boolean
+}
 
 export interface PostState {
     loading: boolean,
-    posts: object[]
+    posts: Post[]
 }
 
 const initialState: PostState = {
     loading: true,
-    posts: [{}]
+    posts: []
 }
 
 export const postSlice = createSlice({
@@ -17,7 +26,7 @@ export const postSlice = createSlice({
     initialState,
     reducers: {
         // Reducer functions
-        loadPost: (state, action: PayloadAction<object[]>) => {
+        loadPost: (state, action: PayloadAction<Post[]>) => {
             state.loading = false
             state.posts = action.payload    
         },

@@ -11,11 +11,11 @@ const AddPost = () => {
 
   return (
       <Box sx={{ position: 
-      'absolute', bottom: '1rem', right: '0.2rem'}}>
+      'fixed', bottom: '1rem', right: '0.2rem'}}>
           <Fab color='primary' onClick={() => setAddModal(true)}>
               <AddIcon />
           </Fab>
-          <AppModal open={addModal} close={closeAddModal} type="add" />
+          <AppModal open={addModal} close={closeAddModal} type="add" id='' index={0} />
       </Box>
   )
 }

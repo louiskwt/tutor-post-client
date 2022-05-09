@@ -1,5 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import EditPost from "../EditPost/EditPost";
+
 
 
 
@@ -38,6 +40,10 @@ const PostItem = (props: any) => {
               <Typography sx={{ mb: 2 }} variant="h6" component='p'>
                Vaccination Record: {props.vaccines}
             </Typography>
+            {/* Button Group */}
+            <Box component='div' sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+                <EditPost id={props.id} index={props.index} />
+            </Box>
 
         </AccordionDetails>
     </Accordion>

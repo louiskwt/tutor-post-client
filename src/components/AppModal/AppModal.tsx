@@ -1,11 +1,14 @@
 import { Box, Modal } from '@mui/material'
 import React from 'react'
 import AddForm from '../Forms/AddForm'
+import EditForm from '../Forms/EditForm';
 
 interface ModalState {
     open: boolean
-    close: () => void;
+    close: () => void
     type: string
+    id: string
+    index: number
 }
 
 const style = {
@@ -31,6 +34,7 @@ const AppModal = (props: ModalState) => {
             >
                 <Box sx={style}>
                     {props.type === 'add' && <AddForm closeModal={props.close} />}
+                    {props.type === 'edit' && <EditForm closeModal={props.close} id={props.id} index={props.index} />}
                 </Box>
           </Modal>
       </div>

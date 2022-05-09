@@ -25,7 +25,7 @@ type Props = {
 const AddForm: React.FC<Props> = ({
     closeModal,
 }) => {
-   
+    
     // Form info state
     const [formInfo, setFormInfo] = useState({
         title: '',
