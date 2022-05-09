@@ -203,6 +203,9 @@ const EditForm: React.FC<Props>  = ({
             <Button color="primary" variant='contained' sx={{ width: '100%', mt: 3 }} onClick={handleEdit}>
                 Edit Post
             </Button>
+            <Button color="inherit" variant='contained' sx={{ width: '100%', mt: 3 }} onClick={closeModal}>
+                Cancel
+            </Button>
         </Box>
     )
 }

@@ -191,6 +191,9 @@ const AddForm: React.FC<Props> = ({
           <Button color="primary" variant='contained'  sx={{ width: '100%', mt: 3 }} onClick={handleSubmit}>
               Add Post 
           </Button>
+          <Button color="inherit" variant='contained' sx={{ width: '100%', mt: 2 }} onClick={closeModal}>
+              Cancel
+          </Button>
     </Box>
   )
 }
