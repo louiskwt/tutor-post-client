@@ -1,6 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditPost from "../EditPost/EditPost";
+import DeletePost from "../DeletePost/DeletePost";
 
 
 
@@ -43,6 +44,7 @@ const PostItem = (props: any) => {
             {/* Button Group */}
             <Box component='div' sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
                 <EditPost id={props.id} index={props.index} />
+                <DeletePost id={props.id} index={props.index}/>
             </Box>
 
         </AccordionDetails>
