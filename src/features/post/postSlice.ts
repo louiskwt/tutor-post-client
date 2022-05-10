@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+// Specify the Post object type
 export type Post = {
     title: string
     name: string
@@ -9,18 +10,22 @@ export type Post = {
     number: string
     vaccines: number
     visit: boolean
+    createdAt: string
 }
+
+// Post state interface
 
 export interface PostState {
     loading: boolean,
     posts: Post[]
 }
-
+// Initial state
 const initialState: PostState = {
     loading: true,
     posts: []
 }
 
+// Post slice
 export const postSlice = createSlice({
     name: 'post',
     initialState,

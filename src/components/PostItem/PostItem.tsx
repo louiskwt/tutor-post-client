@@ -4,8 +4,6 @@ import EditPost from "../EditPost/EditPost";
 import DeletePost from "../DeletePost/DeletePost";
 
 
-
-
 const PostItem = (props: any) => {
   return (
     <Accordion key={props.id} sx={{ mt: 1 }}>
@@ -14,8 +12,8 @@ const PostItem = (props: any) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-            <Typography variant="h5" fontWeight={600}>{props.title}</Typography>
-            <Typography ml={3} component='span' variant="h5" fontWeight={600} >[{props.visit ? '可上門' : '不上門'}] </Typography>
+            <Typography variant="h6" fontWeight={600}>{props.title}</Typography>
+            <Typography ml={3} component='span' variant="h6" fontWeight={600} >[{props.visit ? '可上門' : '不上門'}] </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ textAlign: 'left' }}>
               <Typography sx={{ mb: 2 }} variant="h6" component='h1'>
@@ -41,6 +39,11 @@ const PostItem = (props: any) => {
               <Typography sx={{ mb: 2 }} variant="h6" component='p'>
                Vaccination Record: {props.vaccines}
             </Typography>
+            <Typography variant="h6" component='p'>
+              Created At: {props.createdAt.substring(0, 10)}
+            </Typography>
+
+          
             {/* Button Group */}
             <Box component='div' sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
                 <EditPost id={props.id} index={props.index} />
