@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import AppModal from '../AppModal/AppModal';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+// Props type
 type Props = {
     id: string
     index: number
@@ -12,7 +13,9 @@ const DeletePost: React.FC<Props> = ({
     id,
     index
 }) => {
+    // Handle modal state
     const [deleteModal, setDeleteModal] = useState(false)
+    // Close modal function
     const closeDeleteModal = () => {
         setDeleteModal(false)
     }

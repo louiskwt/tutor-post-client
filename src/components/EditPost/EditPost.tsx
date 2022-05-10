@@ -12,7 +12,9 @@ const EditPost: React.FC<Props> = ({
     id,
     index
 }) => {
+    // modal state
     const [editModal, setEditModal] = useState(false)
+    // close modal function
     const closeEditModal = () => {
         setEditModal(false)
     }

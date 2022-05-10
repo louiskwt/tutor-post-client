@@ -4,6 +4,7 @@ import AddForm from '../Forms/AddForm'
 import DeleteForm from '../Forms/DeleteForm';
 import EditForm from '../Forms/EditForm';
 
+// Modal state type interface
 interface ModalState {
     open: boolean
     close: () => void
@@ -12,6 +13,7 @@ interface ModalState {
     index: number
 }
 
+// MUI modal style
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -27,6 +29,7 @@ const style = {
 const AppModal = (props: ModalState) => {
   return (
       <div>
+          {/* Modal */}
           <Modal 
             open={props.open} 
             onClose={() => props.close()}
@@ -34,6 +37,7 @@ const AppModal = (props: ModalState) => {
             aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
+                    {/* Modal element based on types */}
                     {props.type === 'add' && <AddForm closeModal={props.close} />}
                     {props.type === 'edit' && <EditForm closeModal={props.close} id={props.id} index={props.index} />}
                     {props.type === 'delete' && <DeleteForm closeModal={props.close} id={props.id} />}

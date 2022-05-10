@@ -6,11 +6,13 @@ import { reload } from '../../features/post/postSlice'
 import { Box, Button, MenuItem, Select, TextField, Typography } from '@mui/material'
 import axios from 'axios'; 
 
+// Visit Input options
 const visit = [
     true,
     false
 ]
 
+// Vaccination Record options
 const vaccines = [
     0,
     1,
@@ -18,6 +20,7 @@ const vaccines = [
     3
 ]
 
+// Props type
 type Props = {
     closeModal: () => void,
     id: string,
@@ -29,12 +32,15 @@ const EditForm: React.FC<Props>  = ({
     id,
     index
 }) => {
-
+    // Retrive all the posts from Redux
     const posts = useSelector((state: RootState) => state.post.posts)
+
+    // Find the selected post through index prop
     const selectedPost = posts[index]
 
     // Form info state
     const [formInfo, setFormInfo] = useState({
+        // preset the state with the selected post info
         title: selectedPost.title,
         name: selectedPost.name,
         subject: selectedPost.subject,
@@ -44,7 +50,7 @@ const EditForm: React.FC<Props>  = ({
         vaccines: selectedPost.vaccines,
         visit: selectedPost.visit
     })
-
+    // pull in the dispatch function from reduxt to use reload function later
     const dispatch = useDispatch()
 
     // Handle Input Change
@@ -67,8 +73,10 @@ const EditForm: React.FC<Props>  = ({
         // Validate the form
         let key: keyof typeof formInfo
 
+        // Loop over the formInfo object to vaidate
         for (key in formInfo) {
             if (formInfo[key] === '') {
+                // Warn the user if a filed has not been filled
                 toast.error('Please enter all the required (*) fields first', {
                     position: "top-center",
                     autoClose: 5000,
@@ -84,6 +92,7 @@ const EditForm: React.FC<Props>  = ({
         // Submit to the backend
         axios.put(`http://54.242.252.42:8000/posts/edit/${id}`, formInfo)
             .then(res => {
+                // Success essage
                 toast.success(res.data, {
                     position: "top-center",
                     autoClose: 5000,
@@ -93,22 +102,32 @@ const EditForm: React.FC<Props>  = ({
                     draggable: true,
                     progress: undefined,
                 })
+
+                // trigger a reload to update the list
                 dispatch(reload())
+
+                // close the modal
                 closeModal()
             })
-            .catch(err => toast.error(err.message, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            }))
+            .catch(err => {
+                // error message
+                toast.error(err.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            })
     }
     return (
         <Box sx={{ width: '100%' }}>
+            {/* Form Title */}
             <Typography variant='h6' component='h1'>Edit Post</Typography>
+
+            {/* Edit From */}
             <TextField
                 required
                 id="title"
@@ -200,9 +219,12 @@ const EditForm: React.FC<Props>  = ({
                 value={formInfo.number}
                 onChange={(e) => handleInputChange(e.target.value, e.target.id)}
             />
+
+            {/* Form Buttons */}
             <Button color="primary" variant='contained' sx={{ width: '100%', mt: 3 }} onClick={handleEdit}>
                 Edit Post
             </Button>
+
             <Button color="inherit" variant='contained' sx={{ width: '100%', mt: 3 }} onClick={closeModal}>
                 Cancel
             </Button>

@@ -5,11 +5,12 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux'
 import { reload } from '../../features/post/postSlice'
 
+// Visit Input options
 const visit = [
     true,
     false
 ]
-
+// Vaccination Record options
 const vaccines = [
     0,
     1,
@@ -17,6 +18,7 @@ const vaccines = [
     3
 ]
 
+// Props type
 type Props = {
     closeModal: () => void
 }
@@ -38,6 +40,7 @@ const AddForm: React.FC<Props> = ({
         visit: false
     })
 
+    // Dispatch function from slice to use reload function later
     const dispatch = useDispatch()
 
     // Handle Input Change
@@ -45,6 +48,7 @@ const AddForm: React.FC<Props> = ({
         let data = {...formInfo, [id]: value}
         setFormInfo(data)
     }
+
     // Handle Visit Change
     const handleVisitChange = (value: string, id: string) => {
         if(value === '不上門') {
@@ -55,12 +59,15 @@ const AddForm: React.FC<Props> = ({
         let data = {...formInfo, [id]: true}
         setFormInfo(data)
     }
+
     // Handle Submit
     const handleSubmit = () => {
         // Validate the form
         let key: keyof typeof formInfo
 
+        // Loop over the form info object to validate
         for (key in formInfo) {
+            // Warn the user if a field has not been filled
             if(formInfo[key] === '') {
                 toast.error('Please enter all the required (*) fields first', {
                     position: "top-center",
@@ -71,12 +78,14 @@ const AddForm: React.FC<Props> = ({
                     draggable: true,
                     progress: undefined,
                 })
-                return
+                return // stop the submission and return
             }
         }
-        // Submit to the backend
+
+        // Submit to the backend once validated
         axios.post('http://54.242.252.42:8000/posts/add', formInfo)
                 .then(res => {
+                    // Success message
                     toast.success(res.data, {
                         position: "top-center",
                         autoClose: 5000,
@@ -86,22 +95,31 @@ const AddForm: React.FC<Props> = ({
                         draggable: true,
                         progress: undefined,
                     })
+                    // trigger a reload to update the list
                     dispatch(reload())
+                    
+                    // Close the modal
                     closeModal()
                 })
-                .catch(err => toast.error(err.message, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                }))
+                .catch(err => {
+                    // error message
+                    toast.error(err.message, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                })
     }
   return (
     <Box sx={{ width: '100%' }}>
+            {/* Title */}
              <Typography variant='h6' component='h1'>Add a New Post</Typography>
+
+             {/* Add form  */}
               <TextField
                   required
                   id="title"
@@ -188,6 +206,8 @@ const AddForm: React.FC<Props> = ({
               sx={{ mr: 2, mt: 3 }}
               onChange={(e) => handleInputChange(e.target.value, e.target.id)}
           />
+          
+          {/* Form Buttons */}
           <Button color="primary" variant='contained'  sx={{ width: '100%', mt: 3 }} onClick={handleSubmit}>
               Add Post 
           </Button>
