@@ -53,7 +53,7 @@ const PostList = () => {
     ): (
       <Box mt={3} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '3rem' }}>
               {posts.map((post: any, index: number) => (
-                <PostItem key={index} id={post.id} name={post.name} title={post.title} location={post.location} visit={post.visit} vaccines={post.vaccines} description={post.description} number={post.number} subject={post.subject} index={index} createdAt={post.createdAt} />
+                  <PostItem key={index} id={post.id} name={post.name} title={post.title} location={post.location} visit={post.visit} vaccines={post.vaccines} description={post.description} number={post.number} subject={post.subject} index={index} createdAt={post.createdAt} />
               ))}
       </Box>
     ))
